@@ -1,4 +1,4 @@
-# Owner A configuration. Copy to gitignored config.toml.
+# Local-first configuration. Copy to gitignored config.toml.
 # One provider per role, with no silent fallback. Spoken language is independent
 # of input language and Traditional/Simplified preferences (owned by C/D).
 [audio]
@@ -15,6 +15,29 @@ stop_hotkey = "<f8>"
 # During playback, microphone input is suppressed. Explicitly starting a new
 # listening turn cancels playback, drains captured data and waits echo_tail_ms.
 # Hands-free stop during speaker playback is NOT acoustically qualified.
+
+[decider]
+enabled = false
+provider = "laya"
+base_url = "http://127.0.0.1:8768/v1"
+model = "laya"
+revision = "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851/multilingual"
+locality = "local"
+local_server_verified = false
+languages = ["en", "yue", "cmn", "mixed"]
+
+[text_model]
+enabled = false
+provider = "llama_cpp"
+base_url = "http://127.0.0.1:8769/v1"
+model = "empero-ai/Qwen3.8-4B-Distill-GGUF"
+revision = "391fc7d103e3942a408def3e4f51c2f85d464417"
+locality = "local"
+local_server_verified = false
+supports_images = false
+languages = ["en", "yue", "cmn", "mixed"]
+# Enable only after inspecting the local non-forwarding server and loading the
+# pinned artifact. User-chosen hosted configuration: config.cloud.example.toml.
 
 [asr]
 provider = "llama_cpp"

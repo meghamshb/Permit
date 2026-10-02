@@ -1,6 +1,6 @@
 # Dependency and model credits
 
-This records owner A's speech dependencies on 3 October 2026. Libraries are used
+This records A/B/C dependencies on 3 October 2026. Libraries are used
 as dependencies; Permit is not a fork of another assistant. The repository has
 not declared a license for Permit itself. The team must choose that separately.
 License metadata is evidence of the package declaration, not an eligibility decision.
@@ -130,6 +130,61 @@ The source links below are the versioned PyPI metadata used for this inventory.
 
 Build tooling is separate from the runtime lockfile: Hatchling uses MIT licensing
 and is selected by the build-system requirement in `pyproject.toml`. GitHub CI uses
-`actions/checkout@v4` and `astral-sh/setup-uv@v6` (MIT); CI has been added but has not
-been executed on GitHub from this checkout. Update this inventory when the lockfile,
+`actions/checkout@v4` and `astral-sh/setup-uv@v6` (MIT); CI outcomes are recorded in
+the relevant pull request. Update this inventory when the lockfile,
 runtime, model or packaged voice assets change.
+
+## B/C integration additions
+
+Computer-access code is integrated from this repository's B branch at
+`1adc77f53fe59ead7fe270d2fec15aba7c7bf2ad`; its Git authorship and handoff are retained.
+No external whole-assistant implementation was copied.
+
+| Artifact | Version / revision | License/source |
+|---|---|---|
+| Node on C's Windows fixture | 24.18.0 | [MIT and bundled notices](https://github.com/nodejs/node) |
+| npm | Installed with Node | [Artistic-2.0 and bundled notices](https://github.com/npm/cli) |
+| Microsoft Playwright MCP | 0.0.83 | [Apache-2.0](https://github.com/microsoft/playwright-mcp) |
+| Playwright/playwright-core | 1.64.0-alpha-1790635538000 | [Apache-2.0](https://github.com/microsoft/playwright) |
+| Chromium | 155.0.8059.12, build 1247 | [Chromium and third-party notices](https://www.chromium.org/Home/chromium-projects/); no binary committed |
+| TypeSafe Jev | Hosted alias jev-latest, resolved jev-1.13.0 | [Proprietary hosted service/API](https://docs.typesafe.ai/api); no weights distributed |
+| Official TypeSafe SDK reference | Not installed; C uses the published wire protocol | [MIT reference SDK](https://github.com/typesafe-ai/typesafe-sdk-python) |
+| OpenRouter / DeepSeek V4.1 Flash | deepseek/deepseek-v4.1-flash; catalog revision 20260910 | [Hosted model/service](https://openrouter.ai/deepseek/deepseek-v4.1-flash); no weights distributed |
+| Laya multilingual local option | convaiinnovations/laya @ 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851/multilingual | [Apache-2.0](https://huggingface.co/convaiinnovations/laya); runtime unrun |
+| Local planner GGUF option | empero-ai/Qwen3.8-4B-Distill-GGUF @ 391fc7d103e3942a408def3e4f51c2f85d464417 | [Apache-2.0 conversion metadata](https://huggingface.co/empero-ai/Qwen3.8-4B-Distill-GGUF); runtime unrun |
+
+New lockfile packages, including optional/platform/transitive branches, use the
+versioned PyPI declarations below. Undeclared metadata requires upstream review.
+
+| Package | Locked version | Declared license |
+|---|---|---|
+| [annotated-types](https://pypi.org/pypi/annotated-types/0.8.0/json) | 0.8.0 | MIT |
+| [attrs](https://pypi.org/pypi/attrs/26.1.0/json) | 26.1.0 | MIT |
+| [comtypes](https://pypi.org/pypi/comtypes/1.4.17/json) | 1.4.17 | MIT |
+| [cryptography](https://pypi.org/pypi/cryptography/50.0.2/json) | 50.0.2 | Apache-2.0 OR BSD-3-Clause |
+| [httpx-sse](https://pypi.org/pypi/httpx-sse/0.4.3/json) | 0.4.3 | MIT |
+| [jaraco-classes](https://pypi.org/pypi/jaraco-classes/3.4.0/json) | 3.4.0 | Undeclared |
+| [jaraco-context](https://pypi.org/pypi/jaraco-context/6.1.2/json) | 6.1.2 | MIT |
+| [jaraco-functools](https://pypi.org/pypi/jaraco-functools/4.6.0/json) | 4.6.0 | MIT |
+| [jeepney](https://pypi.org/pypi/jeepney/0.9.0/json) | 0.9.0 | MIT |
+| [jsonschema](https://pypi.org/pypi/jsonschema/4.26.0/json) | 4.26.0 | MIT |
+| [jsonschema-specifications](https://pypi.org/pypi/jsonschema-specifications/2025.9.1/json) | 2025.9.1 | MIT |
+| [keyring](https://pypi.org/pypi/keyring/25.7.0/json) | 25.7.0 | MIT |
+| [mcp](https://pypi.org/pypi/mcp/1.30.0/json) | 1.30.0 | MIT |
+| [more-itertools](https://pypi.org/pypi/more-itertools/11.1.0/json) | 11.1.0 | MIT |
+| [pydantic](https://pypi.org/pypi/pydantic/2.13.5/json) | 2.13.5 | MIT |
+| [pydantic-core](https://pypi.org/pypi/pydantic-core/2.46.5/json) | 2.46.5 | MIT |
+| [pydantic-settings](https://pypi.org/pypi/pydantic-settings/2.15.0/json) | 2.15.0 | MIT |
+| [pyjwt](https://pypi.org/pypi/pyjwt/2.15.1/json) | 2.15.1 | MIT |
+| [pyobjc-framework-screencapturekit](https://pypi.org/pypi/pyobjc-framework-screencapturekit/12.2.2/json) | 12.2.2 | MIT |
+| [python-dotenv](https://pypi.org/pypi/python-dotenv/1.2.4/json) | 1.2.4 | BSD-3-Clause |
+| [python-multipart](https://pypi.org/pypi/python-multipart/0.0.32/json) | 0.0.32 | Apache-2.0 |
+| [pywin32](https://pypi.org/pypi/pywin32/312/json) | 312 | PSF |
+| [pywin32-ctypes](https://pypi.org/pypi/pywin32-ctypes/0.2.3/json) | 0.2.3 | BSD-3-Clause |
+| [referencing](https://pypi.org/pypi/referencing/0.37.0/json) | 0.37.0 | MIT |
+| [rpds-py](https://pypi.org/pypi/rpds-py/2026.6.3/json) | 2026.6.3 | MIT |
+| [secretstorage](https://pypi.org/pypi/secretstorage/3.5.0/json) | 3.5.0 | BSD-3-Clause |
+| [sse-starlette](https://pypi.org/pypi/sse-starlette/3.5.0/json) | 3.5.0 | BSD-3-Clause |
+| [starlette](https://pypi.org/pypi/starlette/1.7.0/json) | 1.7.0 | BSD-3-Clause |
+| [typing-inspection](https://pypi.org/pypi/typing-inspection/0.4.4/json) | 0.4.4 | MIT |
+| [uvicorn](https://pypi.org/pypi/uvicorn/0.54.0/json) | 0.54.0 | BSD-3-Clause |

@@ -1,0 +1,12 @@
+{
+  "machine_id": "windows-hacku-01",
+  "recorded_at": "2026-10-03T04:18:29.0422664+08:00",
+  "os_build": "26200",
+  "cpu": "Intel(R) Core(TM) Ultra 9 275HX",
+  "logical_processors": 24,
+  "usable_ram_kib": 32961912,
+  "available_ram_kib": 8054072,
+  "pagefile_current_usage_mib": 3953.0,
+  "conditions": "Normal desktop apps open, before C Windows native qualification; an earlier provider smoke had run. RAM/pagefile are snapshots, not runtime peaks; hosted-model memory is unknown.",
+  "python": "3.12.14"
+}

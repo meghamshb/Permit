@@ -1,0 +1,129 @@
+{
+  "machine_id": "windows-hacku-01",
+  "date": "2026-10-03",
+  "fixture": "owned synthetic WinForms; typed input, no microphone/TTS",
+  "qualification_context": "Earlier successful instrumented run. Subsequent repeats failed to acquire the owned fixture's foreground focus; see windows-controller-focus-failure-2026-10-03.json. The high-resolution timing change was made after this successful run.",
+  "timing_clock": "time.monotonic on Windows; coarse measurements, not sub-millisecond precision",
+  "results": [
+    {
+      "case": "typed_exact_dictation",
+      "language": "en",
+      "status": "verified",
+      "elapsed_ms": 125,
+      "operation_count": 1,
+      "data_destination": "local UIA; no model"
+    },
+    {
+      "case": "typed_exact_dictation",
+      "language": "yue",
+      "status": "verified",
+      "elapsed_ms": 109,
+      "operation_count": 1,
+      "data_destination": "local UIA; no model"
+    },
+    {
+      "case": "typed_exact_dictation",
+      "language": "cmn",
+      "status": "verified",
+      "elapsed_ms": 94,
+      "operation_count": 1,
+      "data_destination": "local UIA; no model"
+    },
+    {
+      "case": "typed_exact_dictation",
+      "language": "mixed",
+      "status": "verified",
+      "elapsed_ms": 110,
+      "operation_count": 1,
+      "data_destination": "local UIA; no model"
+    },
+    {
+      "case": "goal_decide_plan_invoke_readback",
+      "status": "verified",
+      "reason": "",
+      "elapsed_ms": 9640,
+      "operation_count": 1,
+      "data_destination": "TypeSafe + OpenRouter selected model; public fixture text"
+    },
+    {
+      "case": "scoped_screen_description",
+      "status": "generated",
+      "reason": "visual_interpretation_not_action_verification",
+      "elapsed_ms": 3360,
+      "generated_nonempty": true,
+      "data_destination": "OpenRouter selected model; owned fixture window only",
+      "image_persisted": false,
+      "human_description_quality": "unrun"
+    },
+    {
+      "case": "denied_cloud_description",
+      "status": "limited",
+      "reason": "capture_or_cloud_grant_required",
+      "elapsed_ms": 31,
+      "data_destination": "local accessible state only"
+    }
+  ],
+  "native_calls": "one dedicated thread, including construction and cleanup",
+  "human_or_mac_qualification": "unrun",
+  "screenshots_or_bodies_saved": false,
+  "provider_measurements": [
+    {
+      "role": "decider",
+      "turn_id": "590ffac2183749c4a18d84bc5b938931",
+      "provider": "typesafe",
+      "model": "jev-latest",
+      "resolved_model": "jev-1.13.0",
+      "fields": [
+        "goal",
+        "screen_text"
+      ],
+      "elapsed_ms": 2110,
+      "input_tokens": 833,
+      "output_tokens": 44,
+      "reported_cost_usd": null
+    },
+    {
+      "role": "chat",
+      "turn_id": "590ffac2183749c4a18d84bc5b938931",
+      "provider": "openrouter",
+      "model": "deepseek/deepseek-v4.1-flash",
+      "resolved_model": "deepseek/deepseek-v4.1-flash",
+      "backend": "Morph",
+      "fields": [
+        "goal",
+        "screen_text"
+      ],
+      "elapsed_ms": 7406,
+      "input_tokens": 452,
+      "output_tokens": 7,
+      "reported_cost_usd": 0.000012173
+    },
+    {
+      "role": "chat",
+      "turn_id": "a4475f576d5f4307a564444a96d20bbb",
+      "provider": "openrouter",
+      "model": "deepseek/deepseek-v4.1-flash",
+      "resolved_model": "deepseek/deepseek-v4.1-flash",
+      "backend": "Relace",
+      "fields": [
+        "goal",
+        "screenshot"
+      ],
+      "elapsed_ms": 3329,
+      "input_tokens": 240,
+      "output_tokens": 134,
+      "reported_cost_usd": 0.0000852
+    }
+  ],
+  "screen_stage_measurements": [
+    {
+      "turn_id": "a4475f576d5f4307a564444a96d20bbb",
+      "capture_ms": 0,
+      "cloud_round_trip_ms": 3329,
+      "upload_ms": null,
+      "server_inference_ms": null,
+      "first_audio_ms": null,
+      "unavailable_metrics": "Capture was below the old clock's resolution; 0 is not a claim of zero capture latency. Upload/inference not separated; no TTS timing."
+    }
+  ]
+}

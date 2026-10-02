@@ -1,0 +1,204 @@
+{
+  "frozen_at": "2026-10-03",
+  "owner": "C",
+  "qualification_rule": "Unit/fake and typed fixture evidence does not qualify a human voice case.",
+  "cases": [
+    {
+      "id": "read",
+      "language": "en",
+      "description": "Read original names, leading-zero code 007381 and quoted instructions from granted native/browser/file state.",
+      "windows_human_voice": "unrun",
+      "macos_human_voice": "unrun",
+      "manual_baseline": "unrun"
+    },
+    {
+      "id": "draft",
+      "language": "en",
+      "description": "Ground a generated draft in the selected message/document, preserve facts, honor explicit writing system and label it generated.",
+      "windows_human_voice": "unrun",
+      "macos_human_voice": "unrun",
+      "manual_baseline": "unrun"
+    },
+    {
+      "id": "dictate",
+      "language": "en",
+      "description": "Insert exact user words, names, CJK and leading zeros into a freshly selected control; read back without a writer.",
+      "windows_human_voice": "unrun",
+      "macos_human_voice": "unrun",
+      "manual_baseline": "unrun"
+    },
+    {
+      "id": "cross_app",
+      "language": "en",
+      "description": "Perform a new bounded multi-step native/browser/file goal, correct the goal midway and verify the final state.",
+      "windows_human_voice": "unrun",
+      "macos_human_voice": "unrun",
+      "manual_baseline": "unrun"
+    },
+    {
+      "id": "stop_failure",
+      "language": "en",
+      "description": "Stop delayed inference/dispatch, deny disclosure, reconcile an uncertain write and reject a late notification confirmation.",
+      "windows_human_voice": "unrun",
+      "macos_human_voice": "unrun",
+      "manual_baseline": "unrun"
+    },
+    {
+      "id": "read",
+      "language": "yue",
+      "description": "Read original names, leading-zero code 007381 and quoted instructions from granted native/browser/file state.",
+      "windows_human_voice": "unrun",
+      "macos_human_voice": "unrun",
+      "manual_baseline": "unrun"
+    },
+    {
+      "id": "draft",
+      "language": "yue",
+      "description": "Ground a generated draft in the selected message/document, preserve facts, honor explicit writing system and label it generated.",
+      "windows_human_voice": "unrun",
+      "macos_human_voice": "unrun",
+      "manual_baseline": "unrun"
+    },
+    {
+      "id": "dictate",
+      "language": "yue",
+      "description": "Insert exact user words, names, CJK and leading zeros into a freshly selected control; read back without a writer.",
+      "windows_human_voice": "unrun",
+      "macos_human_voice": "unrun",
+      "manual_baseline": "unrun"
+    },
+    {
+      "id": "cross_app",
+      "language": "yue",
+      "description": "Perform a new bounded multi-step native/browser/file goal, correct the goal midway and verify the final state.",
+      "windows_human_voice": "unrun",
+      "macos_human_voice": "unrun",
+      "manual_baseline": "unrun"
+    },
+    {
+      "id": "stop_failure",
+      "language": "yue",
+      "description": "Stop delayed inference/dispatch, deny disclosure, reconcile an uncertain write and reject a late notification confirmation.",
+      "windows_human_voice": "unrun",
+      "macos_human_voice": "unrun",
+      "manual_baseline": "unrun"
+    },
+    {
+      "id": "read",
+      "language": "cmn",
+      "description": "Read original names, leading-zero code 007381 and quoted instructions from granted native/browser/file state.",
+      "windows_human_voice": "unrun",
+      "macos_human_voice": "unrun",
+      "manual_baseline": "unrun"
+    },
+    {
+      "id": "draft",
+      "language": "cmn",
+      "description": "Ground a generated draft in the selected message/document, preserve facts, honor explicit writing system and label it generated.",
+      "windows_human_voice": "unrun",
+      "macos_human_voice": "unrun",
+      "manual_baseline": "unrun"
+    },
+    {
+      "id": "dictate",
+      "language": "cmn",
+      "description": "Insert exact user words, names, CJK and leading zeros into a freshly selected control; read back without a writer.",
+      "windows_human_voice": "unrun",
+      "macos_human_voice": "unrun",
+      "manual_baseline": "unrun"
+    },
+    {
+      "id": "cross_app",
+      "language": "cmn",
+      "description": "Perform a new bounded multi-step native/browser/file goal, correct the goal midway and verify the final state.",
+      "windows_human_voice": "unrun",
+      "macos_human_voice": "unrun",
+      "manual_baseline": "unrun"
+    },
+    {
+      "id": "stop_failure",
+      "language": "cmn",
+      "description": "Stop delayed inference/dispatch, deny disclosure, reconcile an uncertain write and reject a late notification confirmation.",
+      "windows_human_voice": "unrun",
+      "macos_human_voice": "unrun",
+      "manual_baseline": "unrun"
+    },
+    {
+      "id": "read",
+      "language": "mixed",
+      "description": "Read original names, leading-zero code 007381 and quoted instructions from granted native/browser/file state.",
+      "windows_human_voice": "unrun",
+      "macos_human_voice": "unrun",
+      "manual_baseline": "unrun"
+    },
+    {
+      "id": "draft",
+      "language": "mixed",
+      "description": "Ground a generated draft in the selected message/document, preserve facts, honor explicit writing system and label it generated.",
+      "windows_human_voice": "unrun",
+      "macos_human_voice": "unrun",
+      "manual_baseline": "unrun"
+    },
+    {
+      "id": "dictate",
+      "language": "mixed",
+      "description": "Insert exact user words, names, CJK and leading zeros into a freshly selected control; read back without a writer.",
+      "windows_human_voice": "unrun",
+      "macos_human_voice": "unrun",
+      "manual_baseline": "unrun"
+    },
+    {
+      "id": "cross_app",
+      "language": "mixed",
+      "description": "Perform a new bounded multi-step native/browser/file goal, correct the goal midway and verify the final state.",
+      "windows_human_voice": "unrun",
+      "macos_human_voice": "unrun",
+      "manual_baseline": "unrun"
+    },
+    {
+      "id": "stop_failure",
+      "language": "mixed",
+      "description": "Stop delayed inference/dispatch, deny disclosure, reconcile an uncertain write and reject a late notification confirmation.",
+      "windows_human_voice": "unrun",
+      "macos_human_voice": "unrun",
+      "manual_baseline": "unrun"
+    }
+  ],
+  "typed_smoke": [
+    {
+      "id": "native_exact",
+      "windows": "passed_synthetic_UIA",
+      "latest_repeat": "failed_before_dispatch_owned_fixture_not_foreground",
+      "macos": "unrun"
+    },
+    {
+      "id": "browser_exact",
+      "windows": "passed_synthetic_MCP",
+      "macos": "unrun"
+    },
+    {
+      "id": "goal_action_verify",
+      "windows": "passed_synthetic_UIA_Jev_planner",
+      "latest_repeat": "failed_before_dispatch_owned_fixture_not_foreground",
+      "macos": "unrun"
+    },
+    {
+      "id": "vision_and_denied_grant",
+      "windows": "passed_owned_fixture_image_and_local_fallback",
+      "latest_repeat": "failed_before_capture_owned_fixture_not_foreground",
+      "macos": "unrun_identity_binding"
+    },
+    {
+      "id": "preference_restart_override",
+      "windows": "passed_SQLite_unit_and_CLI",
+      "macos": "unrun_CLI"
+    }
+  ],
+  "other_coverage": {
+    "windows_secure_files": "unsupported_backend_fails_closed",
+    "live_notifications": "unrun_D_connectors",
+    "notification_state": "fake_contract_tests_only",
+    "human_fluent_review": "unrun",
+    "five_variable_case_repeats": "unrun_full_user_matrix"
+  }
+}

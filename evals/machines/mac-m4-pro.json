@@ -1,0 +1,11 @@
+{
+  "os": "macOS 27.0.1",
+  "os_build": "26A434",
+  "architecture": "arm64",
+  "cpu": "Apple M4 Pro",
+  "ram_bytes": 25769803776,
+  "python": "3.12.14",
+  "node": "26.7.0",
+  "gpu": "Apple integrated GPU; not used by B fixtures",
+  "qualification": "Synthetic B components only; native AX action blocked by Accessibility permission"
+}

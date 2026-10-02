@@ -1,11 +1,15 @@
-# Permit — owner A speech and audio
+# Permit — speech, computer access and controller integration
 
 This checkout implements **A's speech/audio work in AGENTS.md sections 12.1–12.3**:
 local ASR adapters, OS speech, microphone/playback, Silero VAD, language selection,
 the audio side of VoiceSession, queued exact readouts and notification speech.
-It supplies integration contracts for C and D. The task controller, desktop/browser
-actions, product UI, preference database and live messaging connectors remain
-their owners' work; this checkout does not claim a complete working assistant.
+It is now integrated with B's computer access and C's task controller, grants,
+readback, Stop/correction, preferences, vision and notification confirmation policy.
+See [C's setup and handoff](docs/C-handoff.md) and [B's contracts](docs/B-handoff.md).
+The selected Jev/DeepSeek credentials stay in the OS vault. Windows native/browser
+fixtures and cloud screen description have measured evidence in `evals/results/`.
+Mac C integration, D's accessible shell/live messaging and human acceptance remain
+unrun; this checkout does not claim a complete qualified assistant.
 
 ## Start with typed input
 

@@ -1,4 +1,4 @@
-name: Audio lint and unit tests
+name: Permit lint and unit tests
 on:
   push:
   pull_request:

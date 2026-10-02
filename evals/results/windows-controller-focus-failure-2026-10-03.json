@@ -1,0 +1,25 @@
+{
+  "machine_id": "windows-hacku-01",
+  "date": "2026-10-03",
+  "fixture": "owned synthetic WinForms; typed input, no microphone/TTS",
+  "results": [
+    {
+      "case": "fixture_focus_diagnostic",
+      "status": "failed",
+      "owned_fixture_enumerated": true,
+      "owned_process_running": true,
+      "actions_dispatched": 0
+    },
+    {
+      "case": "fixture_setup_or_native_runtime",
+      "status": "failed",
+      "reason": "RuntimeError",
+      "phase": "fixture_focus"
+    }
+  ],
+  "native_calls": "one dedicated thread, including construction and cleanup",
+  "human_or_mac_qualification": "unrun",
+  "screenshots_or_bodies_saved": false,
+  "provider_measurements": [],
+  "screen_stage_measurements": []
+}

@@ -1,0 +1,56 @@
+{
+  "machine_id": "windows-hacku-01",
+  "os": "Windows-11-10.0.26200-SP0",
+  "python": "3.12.14",
+  "fixture": "public synthetic text",
+  "remote_model_cold_warm": "unknown; repeats are client-first/subsequent, not server load measurements",
+  "confidence_calibration": "unrun; smoke does not calibrate routing thresholds",
+  "results": [
+    {
+      "role": "decider",
+      "repeat": 0,
+      "status": "passed",
+      "resolved_model": "jev-1.13.0",
+      "choice": "read",
+      "confidence": 0.89,
+      "elapsed_ms": 1781.0,
+      "usage": {
+        "input_tokens": 388,
+        "output_tokens": 74
+      }
+    },
+    {
+      "role": "writer",
+      "repeat": 0,
+      "status": "passed",
+      "resolved_model": "deepseek/deepseek-v4.1-flash",
+      "elapsed_ms": 2187.0,
+      "input_tokens": 106,
+      "output_tokens": 9,
+      "cost_usd": 7.52e-06
+    },
+    {
+      "role": "decider",
+      "repeat": 1,
+      "status": "passed",
+      "resolved_model": "jev-1.13.0",
+      "choice": "read",
+      "confidence": 0.89,
+      "elapsed_ms": 672.0,
+      "usage": {
+        "input_tokens": 388,
+        "output_tokens": 74
+      }
+    },
+    {
+      "role": "writer",
+      "repeat": 1,
+      "status": "passed",
+      "resolved_model": "deepseek/deepseek-v4.1-flash",
+      "elapsed_ms": 9907.0,
+      "input_tokens": 106,
+      "output_tokens": 9,
+      "cost_usd": 7.52e-06
+    }
+  ]
+}
