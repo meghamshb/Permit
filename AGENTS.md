@@ -276,3 +276,59 @@ Infrastructure and rules:
 - Announcements and readout require no screenshot or vision-model call. Cloud connector access remains subject to the applicable data-sharing grants.
 
 Qualification: receive a message, announce its sender/source, confirm exact readout, decline and snooze another message, handle no response, prevent duplicate announcements after restart, and test two arrivals around one confirmation. Verify that no outgoing message is sent and record any source-side read-status effects.
+
+## 12. Feature freeze and four-person delivery plan
+
+**Decision: the agreed feature set is frozen.** Build the existing voice/text computer assistant, SQLite preference profiles, on-demand screen description and confirmed incoming-message readout for visually impaired users. Do not add product features during these sprints. Qualification can change a provider/runtime through the existing adapters; report unsupported coverage honestly rather than silently dropping requirements. Exact model revisions and connector choices are frozen only after qualification on the team's machines.
+
+The blocks below total **48 working hours from the team's chosen start**; they are a planning template, not a claim about time remaining in the event. If less time remains, compress the blocks and choose a smaller verified demonstration matrix explicitly. The full product scope remains the same. All code must follow the event's build-period rules.
+
+### 12.1 Ownership
+
+This delivery allocation supersedes the suggested owner split in section 10 for these sprints. Each component has one primary owner; integrations are shared through the contracts below.
+
+| Owner | Primary stack ownership | Required delivery |
+|---|---|---|
+| **A — Speech and audio interaction** | `providers/asr/`, `providers/tts/`, audio capture/playback, VAD, language handling; audio side of VoiceSession | Local ASR/TTS on both OSes; English/Cantonese/Mandarin/mixed qualification; exact readout; speech cancellation; queued announcements without overlapping speech or interpreting the assistant's own speech as input. |
+| **B — Desktop and browser execution** | `platform/base.py`, both platform drivers, roles, `routes/browser`, `routes/files`, screenshot capture | Fresh snapshots, semantic actions, focused fallback input, readback, granted file access, Playwright route and scoped screenshot capture; measured native-app qualification on Mac and Windows. |
+| **C — Controller and model integration** | `controller/`, decider/planner adapters, vision-model adapter, grants and verification orchestration | One task loop for voice and text; preference resolution; turn/operation IDs; stop/correction; uncertain-write reconciliation; cloud permission enforcement; frontier screen description; notification confirmations bound to the right message. |
+| **D — Product shell, persistence and messaging** | `ui/`, `store/`, WhatsApp/Outlook MCP source adapters and notification-source plumbing; CI/evaluation coordination | Accessible shell; SQLite migrations and preference/notification records; connector authentication/retrieval, deduplication and snooze; test harness, manual baseline, results and demo assembly. |
+
+D coordinates evaluation; **everyone supplies tests and real-machine evidence for their own components**. C owns the keyring/grant policy contract; D implements connector credential use through that contract. B owns capture permissions; C owns the cloud disclosure decision. A owns audible notification delivery; C owns when a confirmation is valid; D owns incoming-source state and persistence. Agree these boundaries before implementation.
+
+### 12.2 Integration contracts
+
+Freeze these shapes in the first block; use small fakes so everyone can build independently without claiming live integration.
+
+- **A → C:** committed utterance with turn ID, language and text; TTS speak/cancel operations and playback state. Preserve read/dictate content exactly. Define how listening behaves during playback and test voice stop; do not assume muting the microphone solves interruption.
+- **B → C:** the section 4 driver contract; browser/file postconditions; scoped screenshot bytes with capture time and target identity. Do not persist screenshot bytes by default.
+- **D → C:** preference store operations and normalized incoming-message events with stable source/message identity and sender; explicit retrieve-body and snooze operations. Confirmation binds to message identity, not queue position.
+- **C → D:** task/status events, approval questions, grant decisions and preference changes; UI and connectors never declare task completion themselves.
+- **C → A:** exact text versus generated-description mode, output language and priority. Routine notifications wait for ongoing speech; stop invalidates pending task dispatch under section 8.
+- All adapters expose availability and failure explicitly. Provider/connector credentials stay in keyring, outside model context and SQLite preference values.
+
+### 12.3 Sprint blocks
+
+| Block | A delivers | B delivers | C delivers | D delivers | Integration checkpoint |
+|---|---|---|---|---|---|
+| **1: Foundation and qualification — hours 0–6** | ASR/TTS smoke runs on actual machines, including Cantonese; audio-stop design | Native snapshot/read/action smoke on each OS; screenshot permission check | Repository scaffold, shared events/interfaces, model load/latency smoke and grant contract | CI scaffold, SQLite schema, accessible shell smoke; live Outlook/WhatsApp access investigation | Lock supported runtime revisions and contracts. Choose the primary demo machine and workflow; document failures and backups. |
+| **2: First complete loop — hours 6–16** | Voice input/output into controller; typed mode works without audio | Verified native action plus browser/file primitives | Goal → plan/decide → action → readback; stop and correction | UI task/status wiring; save/load/edit preferences | A real user input produces a checked app/file result. Save a preference, restart, use it, then override it for one task. |
+| **3: Agreed features — hours 16–28** | Notification question/readout/snooze speech flow; readout language handling | Browser completion and scoped screen capture; failure boundaries on both OSes | Screen-description provider with cloud grant; notification confirmation state and no-response handling | Live messaging adapters, normalized events, deduplication, snooze and restart recovery | Describe a fresh screen on request. Receive → announce → confirm → exact readout; decline/no response must not expose the body. Label simulated sources. |
+| **4: Reliability and user evidence — hours 28–40** | Speech/language matrix, overlap and voice-stop checks | Wrong focus, stale refs, inaccessible/elevated targets; measured OS coverage | Stop/correction, denied grants, uncertain writes and late confirmation cases | Coordinate target-user sessions, manual comparison and matrix; validate accessible controls | Run the integrated acceptance cases on Mac and Windows; repeat variable cases. Record latency, interventions, mistakes, cost, memory and disclosure. |
+| **5: Stabilization and demonstration — hours 40–48** | Stable audio configuration and language demo preparation | Fix reproducibility/permission issues; machine instructions | Fix integration defects; lock tested configuration and reconcile known limitations | Clean setup/restart run, evidence table, demo and pitch; credit dependencies | A teammate outside the component can start and drive the complete task. Rehearse success, correction and stop/denied-permission paths. No new features. |
+
+### 12.4 Demonstration and freeze gates
+
+Choose one task with a target user; confirm that it solves an observed navigation burden rather than assuming the need. A possible demonstration combines retrieving an incoming message with confirmation, preparing a requested document in a preferred working folder, saving and verifying it, and describing the current screen when asked. Preparation and saving are the commitment for this workflow; no outgoing message is required. User testing may identify a better task without adding features.
+
+Before declaring a component complete, provide a reproducible command or accessible interaction, a verified result, an appropriate failure case, the tested OS/machine and measured latency. A fake/source fixture is useful for tests but is not live-connector evidence.
+
+Before presentation:
+
+- Compare the same task with the target user's usual screen-reader/magnification workflow. Report time, errors and interventions, including small sample size and failed cases.
+- Distinguish local core processing from cloud screenshot interpretation and connected messaging. Do not claim the cloud path works without connectivity.
+- Present only qualified coverage; retain the full acceptance matrix with failed/unrun cases visible.
+- If a connector is unavailable, show a clearly labelled test source and disclose the missing integration. If a provider fails qualification, use an explicitly configured qualified alternative under the same grant policy.
+- Record remaining contradictions/limitations in the specification before the final stack freeze: older general OCR/vision scope versus the no-OCR screen-description path, actual connector read-status behavior, and timing of browser qualification before website evaluations.
+
+Use one integration checkpoint at each block boundary. Fix broken shared interfaces before expanding dependent work. Keep the final block for defects, evidence and rehearsal.
