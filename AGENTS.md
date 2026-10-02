@@ -349,3 +349,35 @@ Use one integration checkpoint at each block boundary. Fix broken shared interfa
 **B's first browser deliverable:** launch the local server, open a test page, obtain an accessibility snapshot, fill a field/click a control and verify the changed page state through a new observation. Demonstrate a denied out-of-scope action and restart/profile behavior. Repeat on Mac and Windows. This is a specification decision, not a claim that a live MCP connection is already installed or tested.
 
 Reference: https://github.com/microsoft/playwright-mcp
+
+## 14. B implementation checkpoint — 3 October 2026
+
+This checkpoint supersedes the initial "nothing is built" status **for B's
+computer-access layer only**. A/C/D product capabilities remain proposed here.
+The existing architecture and feature requirements are unchanged.
+
+- Implemented: shared driver contracts, public macOS AX and Windows UIA adapters,
+  local Playwright MCP route, granted POSIX files, window-only capture, synthetic
+  fixtures and reproducible qualification commands. Controller authorization and
+  verified task completion remain C's responsibility.
+- Measured on macOS 27.0.1 / Apple M4 Pro / 24 GB: 103 unit/adapter tests pass;
+  Ruff lint/format pass. Real synthetic browser fill/readback/save/restart and
+  scope/stale-ref checks pass. Synthetic file operations and in-memory window-only
+  PNG capture pass. These are B component results, not a working assistant claim.
+- Native Mac action smoke reports Accessibility permission required. Native
+  Windows/browser/capture runtime qualification is unrun on this Mac. Fake Windows
+  tests do not establish live Windows coverage.
+- Windows granted files currently fail closed pending a qualified handle-relative
+  backend. Browser uploads/downloads and personal-profile/CDP attachment are
+  disabled pending qualification. Native synthetic input is opt-in and unqualified
+  live. Synchronous AX/UIA/PrintWindow calls need dedicated execution management;
+  hard cancellation of in-flight native calls is not implemented.
+- Screenshot capture uses public ScreenCaptureKit on macOS 14+, with
+  pyobjc-framework-ScreenCaptureKit added to the macos extra. No OCR or cloud calls
+  are made by B. CaptureTarget is distinct from AX window identity.
+
+Evidence: `evals/computer-access-results.json`. Handoff/setup: README and `docs/`.
+Run `uv run --extra macos --extra browser python -m scripts.qualify_computer_access
+--output .runtime/computer-access-results.json` on the Mac; follow the Windows
+handoff on an interactive Windows machine. Do not mark all B canvas goals verified
+until their real-platform and controller-integration acceptance checks pass.
