@@ -12,3 +12,8 @@ config.toml
 *.db-*
 .env
 work/
+.runtime/
+node_modules/
+playwright-output/
+*.png
+*.jpg

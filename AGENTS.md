@@ -2,7 +2,7 @@
 
 This file is the single source of truth for building Permit, our HacKU computer assistant. It is written for teammates and for coding agents (Claude Code, Codex, others). If code and this file disagree, fix one of them in the same PR.
 
-Status (3 October 2026): **owner A's speech/audio component is implemented in this checkout; the complete assistant is not built or qualified.** Local Windows synthetic ASR/TTS/playback/stop checks and unit tests are recorded in `evals/` and summarized in `README.md`. Mac and human/microphone qualification remain unrun, Mandarin voice is missing on the tested Windows machine, and Chinese/mixed transcripts fail the strict writing-system/text fixture comparison. C/B/D integration, live connectors and the product acceptance matrix remain pending. A model that loads, a passing unit test or a demo video is not evidence of a working assistant. Facts below marked *(verify)* come from documentation and have not been tested on our machines.
+Status (3 October 2026): **A's speech/audio, B's computer access and C's controller are integrated in this checkout; the complete assistant is not qualified.** Windows synthetic native/browser readback and granted Jev/OpenRouter model checks are recorded in `evals/`; see `docs/C-handoff.md`. D's accessible shell/live connectors, the full human/microphone matrix and manual baseline remain pending. A's Mandarin voice is missing on the tested Windows machine, and Chinese/mixed ASR transcripts fail the strict writing-system/text fixture comparison. Typed CJK preservation does not qualify spoken-language quality. A model that loads, a passing unit test or a demo video is not evidence of a working assistant. Facts below marked *(verify)* come from documentation and have not been tested on our machines.
 
 ## 1. What we are building
 
@@ -27,7 +27,7 @@ We build **our own infrastructure**. We do not fork PersonalJarvis, Osaurus, Her
 | Files | Python stdlib, restricted to granted folders | same |
 | Vision fallback (phase 2) | Apple Vision OCR via pyobjc; optional vision LLM | `Windows.Media.Ocr` via pywinrt; optional vision LLM |
 | Decider | **Laya** via the `laya` Python package (PyTorch/MPS); FluidUse Core ML is an optional later speed-up | **Laya** via the `laya` package (CPU or CUDA) |
-| Hosted decider (opt-in) | **TypeSafe Jev** via `typesafe-sdk` | same |
+| Hosted decider (opt-in) | **TypeSafe Jev** via its published SystemOne HTTP protocol | same |
 | ASR (local default) | **Qwen3-ASR-0.6B** via **mlx-audio** (`mlx-community/Qwen3-ASR-0.6B-8bit`) | **Qwen3-ASR-0.6B** via **llama.cpp** (`ggml-org/Qwen3-ASR-0.6B-GGUF`) |
 | LLM server (local) | **mlx-lm** server | **llama.cpp** `llama-server` (CPU, CUDA or Vulkan builds) |
 | TTS (default) | Installed OS voices via `AVSpeechSynthesizer` (pyobjc) | Installed OS voices via WinRT `Windows.Media.SpeechSynthesis` (`winrt-Windows.Media.SpeechSynthesis`). Not pyttsx3 (it only sees SAPI5 voices); not the deprecated `winsdk`. |
@@ -98,7 +98,7 @@ Normalize roles to one shared vocabulary (button, text field, list item, menu it
 - **TypeSafe Jev:**
   - Proprietary and **hosted only**, with no published weights.
   - `POST https://api.typesafe.ai/v1/systemone` (model `jev-latest`) or OpenRouter (`typesafe/jev-1.13`).
-  - Official SDK: `typesafe-sdk` (MIT). **Do not install `typesafe-ai`**; it's a third-party shim.
+  - Official SDK reference: `typesafe-sdk` (MIT). C's shared HTTP adapter implements the published wire protocol directly; the SDK is not installed. **Do not install `typesafe-ai`**; it's a third-party shim.
   - Sending screen text to Jev is a **cloud disclosure** and needs a grant (section 7).
 
 One `providers/decide` adapter speaks `/v1/systemone`. Switching between Laya and Jev changes the base URL, key and locality, nothing else. Question types are `choice`, `score` and `noul` (yes/no probability).
@@ -215,7 +215,7 @@ Suggested owners: **A** speech (ASR, TTS, VAD, languages) · **B** platform driv
 
 ## 11. Features
 
-These additions extend the existing controller, provider adapters, UI and SQLite storage. They do not replace the voice/text contract or the platform interfaces above. All capabilities below are **proposed, not built or benchmarked**.
+These additions extend the controller, provider adapters, UI and SQLite storage. They do not replace the voice/text contract or platform interfaces above. C's preference, screen-description and confirmation contracts are implemented; sections 14–15 record actual qualification. D's accessible shell and live incoming-source integrations remain pending.
 
 ### 11.1 Target users and setting
 
@@ -241,7 +241,7 @@ Qualification: save a preference, restart, verify that it is applied, override i
 When asked what is happening on screen, Permit describes the current visible state and responds through the existing text output and optional speech.
 
 - Use fresh AX/UIA or browser state for accessible app, window, focus, dialog and text information.
-- **No separate OCR stage for this feature.** For requests requiring visual interpretation, capture the relevant window or screen and route it to a configured frontier vision-capable ChatGPT/OpenAI model through `providers/`. Pin the selected model in configuration; qualify its actual screenshot support before relying on it.
+- **No separate OCR stage for this feature.** For requests requiring visual interpretation, capture the relevant window or screen and route it through the configured vision-capable provider. The team explicitly selected OpenRouter `deepseek/deepseek-v4.1-flash` for C's Windows fixture, superseding the original OpenAI vision selection. The shared client also supports an explicitly configured OpenAI path. Qualify screenshot support and pin the actual revision before relying on it; user-selected aliases are recorded as non-immutable until frozen.
 - A screenshot sent to a hosted model is a cloud disclosure. Apply section 7: obtain or reuse a valid grant naming the provider, model, screenshot data and expiry before transmission. Capture only the relevant area where possible; broader capture needs an appropriate scope and OS permission.
 - Keep screenshots transient by default. Do not add them to logs, preference profiles or persistent task history.
 - Separate exact retrieved text from generated visual interpretation. State uncertainty, unreadable content and missing coverage; a description is not proof that an action succeeded.
@@ -349,3 +349,81 @@ Use one integration checkpoint at each block boundary. Fix broken shared interfa
 **B's first browser deliverable:** launch the local server, open a test page, obtain an accessibility snapshot, fill a field/click a control and verify the changed page state through a new observation. Demonstrate a denied out-of-scope action and restart/profile behavior. Repeat on Mac and Windows. This is a specification decision, not a claim that a live MCP connection is already installed or tested.
 
 Reference: https://github.com/microsoft/playwright-mcp
+
+## 14. B implementation checkpoint — 3 October 2026
+
+This checkpoint records B's computer-access component evidence. A's evidence is
+in README/evals and C's integration checkpoint is below. D's shell and live
+connectors remain pending. The architecture and feature requirements are unchanged.
+
+- Implemented: shared driver contracts, public macOS AX and Windows UIA adapters,
+  local Playwright MCP route, granted POSIX files, window-only capture, synthetic
+  fixtures and reproducible qualification commands. Controller authorization and
+  verified task completion remain C's responsibility.
+- Measured on macOS 27.0.1 / Apple M4 Pro / 24 GB: 103 unit/adapter tests pass;
+  Ruff lint/format pass. Real synthetic browser fill/readback/save/restart and
+  scope/stale-ref checks pass. Synthetic file operations and in-memory window-only
+  PNG capture pass. These are B component results, not a working assistant claim.
+- Native Mac action smoke reports Accessibility permission required. Native
+  Windows/browser/capture runtime qualification is unrun on this Mac. Fake Windows
+  tests do not establish live Windows coverage.
+- Windows granted files currently fail closed pending a qualified handle-relative
+  backend. Browser uploads/downloads and personal-profile/CDP attachment are
+  disabled pending qualification. Native synthetic input is opt-in and unqualified
+  live. Synchronous AX/UIA/PrintWindow calls need dedicated execution management;
+  hard cancellation of in-flight native calls is not implemented.
+- Screenshot capture uses public ScreenCaptureKit on macOS 14+, with
+  pyobjc-framework-ScreenCaptureKit added to the macos extra. No OCR or cloud calls
+  are made by B. CaptureTarget is distinct from AX window identity.
+
+Evidence: `evals/computer-access-results.json`. Handoff/setup: README and `docs/`.
+Run `uv run --extra macos --extra browser python -m scripts.qualify_computer_access
+--output .runtime/computer-access-results.json` on the Mac; follow the Windows
+handoff on an interactive Windows machine. Do not mark all B canvas goals verified
+until their real-platform and controller-integration acceptance checks pass.
+
+## 15. C implementation checkpoint — 3 October 2026
+
+- Implemented: one bounded observe/decide/plan/act/readback loop for committed
+  voice and typed input, metadata-only task events, exact read/dictate recipes,
+  generated drafts, turn generations, Stop/correction and persisted uncertain
+  operation reconciliation. A's VoiceSession and B's native/browser/file
+  contracts share the same controller; no raw model tool dispatch is exposed.
+- Explicit expiring grants bind target/actions/controls or provider/model/data
+  fields. OS keyring stores credentials and the journal HMAC key. SQLite's C/D
+  reference store persists accepted scoped preferences and notification metadata,
+  with task overrides taking precedence. Preferences grant no access.
+- Notification confirmation binds to stable source/message identity, turn and
+  expiry. Tests cover two arrivals, late/duplicate yes, no response, decline,
+  snooze, restart deduplication, revocation and Stop. D must provide qualified live
+  sources and disclose retrieval read-status effects. Simulated sources are labelled.
+- Measured on Windows build 26200 / Core Ultra 9 275HX: exact typed English,
+  Cantonese, Mandarin and mixed CJK readback on owned native and browser fixtures;
+  a Jev/planner/native invoke with fresh readback; transient window screenshot
+  description and denied-cloud accessible fallback. Fixtures contain synthetic
+  public data. These checks do not qualify arbitrary apps, fluency or a live connector.
+  Later native repeats could enumerate the owned fixture but could not acquire
+  its foreground focus; they failed before model calls or dispatch. Record this
+  repeatability limitation alongside the earlier successful runs.
+- Configuration follows the team's explicit selection: `jev-latest` resolved to
+  `jev-1.13.0`; OpenRouter `deepseek/deepseek-v4.1-flash` serves planner/writer/vision
+  with reasoning `none`. Aliases are not immutable revisions. Gateway backends,
+  tokens, reported cost and round trips are recorded; Jev cost, separate upload/
+  server inference, audio latency and runtime peak RAM/swap are unavailable.
+  No Jev confidence threshold is calibrated; the explicitly selected planner is
+  used under the same disclosure policy. Local Laya/planner model runtimes are unrun.
+- Native calls have one dedicated execution thread, including COM construction
+  and cleanup. Stop invalidates future dispatch immediately; an already dispatched
+  OS call may still commit. Its journal record remains uncertain until readback.
+  Mac AX and CG capture identities differ; the combined description path fails
+  closed until B/C qualify that binding. Mac native integration remains unrun.
+  Windows null-HANDLE focused children now resolve through their parent window.
+  TODO(macOS): qualify focused AX children without their own window on a real Mac.
+- D's accessible shell, real Outlook/WhatsApp, human microphone/fluent-speaker
+  matrix, full cross-app workflow, repeated variable user cases and manual baseline
+  remain unrun. Windows secure files remain unsupported by B's backend. The frozen
+  20 language cases and 5 typed smoke checks retain these gaps visibly.
+
+Setup, repro commands and integration API: `docs/C-handoff.md`. Synthetic metadata
+evidence: `evals/results/windows-controller*.json`; frozen matrix:
+`evals/cases/owner-c-controller.json`. Original A/B evidence remains separate.

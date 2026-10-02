@@ -1,0 +1,80 @@
+{
+  "measured_at": "2026-10-03T02:33:12.761189+08:00",
+  "machine": {
+    "os": "Darwin",
+    "release": "27.0.0",
+    "architecture": "arm64",
+    "python": "3.12.14"
+  },
+  "scope": "Synthetic computer-access qualification only; no personal apps/messages.",
+  "timing_note": "One run per fixture plus browser restart; not a latency distribution.",
+  "native": {
+    "module": "scripts.macos_smoke",
+    "exit_code": 2,
+    "result": {
+      "native_status": "permission_required",
+      "reason": "Enable Accessibility for the responsible app in System Settings \u2192 Privacy & Security \u2192 Accessibility."
+    }
+  },
+  "capture": {
+    "module": "scripts.capture_smoke",
+    "exit_code": 0,
+    "result": {
+      "capture_status": "verified",
+      "synthetic_fixture": true,
+      "width": 500,
+      "height": 252,
+      "media_type": "image/png",
+      "bytes": 22382,
+      "capture_ms": 446.73,
+      "persisted": false,
+      "cloud_sent": false
+    }
+  },
+  "files": {
+    "module": "scripts.files_smoke",
+    "exit_code": 0,
+    "result": {
+      "status": "verified-synthetic",
+      "operations": 5,
+      "elapsed_ms": 2.92
+    }
+  },
+  "browser": {
+    "module": "scripts.browser_smoke",
+    "exit_code": 0,
+    "result": {
+      "os": "macOS-27.0.1-arm64-arm-64bit",
+      "package": "@playwright/mcp@0.0.83",
+      "mode": "headless Chromium; synthetic localhost only",
+      "checks": {
+        "exact_field_readback": true,
+        "saved_status_readback": true,
+        "stale_ref_denied": true,
+        "outside_origin_denied": true,
+        "dedicated_profile_restart": true
+      },
+      "timings": {
+        "mcp_start_0_ms": 538.0,
+        "navigate_snapshot_0_ms": 381.9,
+        "fill_readback_click_verify_ms": 220.0,
+        "mcp_start_1_ms": 207.9,
+        "navigate_snapshot_1_ms": 191.7
+      }
+    }
+  },
+  "remaining": [
+    "Native action requires OS permission and real desktop qualification.",
+    "Windows native/browser/capture live qualification must run on Windows.",
+    "Windows descriptor-relative files are unsupported; route fails closed.",
+    "Browser transfers and existing personal-profile attachment are disabled.",
+    "Integrated controller, speech and messaging remain owned by A/C/D."
+  ],
+  "validation": {
+    "extras_environment": "103 passed",
+    "default_environment": "102 passed, 1 skipped (optional PyObjC bridge)",
+    "ruff_check": "passed",
+    "ruff_format_check": "passed",
+    "github_ci": "not yet run"
+  }
+}

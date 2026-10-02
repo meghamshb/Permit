@@ -1,0 +1,40 @@
+{
+  "date": "2026-10-03",
+  "os": "Windows-11-10.0.26200-SP0",
+  "fixture": "synthetic local page, dedicated temporary profile",
+  "results": [
+    {
+      "language": "en",
+      "status": "verified",
+      "elapsed_ms": 407.0,
+      "operation_count": 1,
+      "data_destination": "local synthetic site; no AI provider"
+    },
+    {
+      "language": "yue",
+      "status": "verified",
+      "elapsed_ms": 46.0,
+      "operation_count": 1,
+      "data_destination": "local synthetic site; no AI provider"
+    },
+    {
+      "language": "cmn",
+      "status": "verified",
+      "elapsed_ms": 16.0,
+      "operation_count": 1,
+      "data_destination": "local synthetic site; no AI provider"
+    },
+    {
+      "language": "mixed",
+      "status": "verified",
+      "elapsed_ms": 31.0,
+      "operation_count": 1,
+      "data_destination": "local synthetic site; no AI provider"
+    }
+  ],
+  "mcp": "1.30.0",
+  "playwright_mcp": "0.0.83",
+  "node": "24.18.0 on recorded Windows machine",
+  "personal_profile_or_remote_site": false,
+  "human_or_mac_qualification": "unrun"
+}

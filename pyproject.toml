@@ -1,11 +1,19 @@
 [project]
 name = "permit-assistant"
 version = "0.1.0"
-description = "Permit speech and audio interaction layer (owner A)"
+description = "Permit speech, computer access and controller integration"
 requires-python = ">=3.12,<3.13"
-dependencies = ["httpx==0.28.1"]
+dependencies = ["httpx==0.28.1", "keyring==25.7.0"]
 
 [project.optional-dependencies]
+macos = [
+  "pyobjc-framework-ApplicationServices>=11,<13; sys_platform == 'darwin'",
+  "pyobjc-framework-Cocoa>=11,<13; sys_platform == 'darwin'",
+  "pyobjc-framework-Quartz>=11,<13; sys_platform == 'darwin'",
+  "pyobjc-framework-ScreenCaptureKit>=11,<13; sys_platform == 'darwin'",
+]
+windows = ["comtypes>=1.4,<2; sys_platform == 'win32'"]
+browser = ["mcp>=1.20,<2"]
 hotkeys = ["pynput==1.8.1"]
 speech = [
   "numpy==2.5.3",
@@ -21,6 +29,7 @@ mac-asr = ["mlx-audio==0.5.7; sys_platform == 'darwin' and platform_machine == '
 
 [project.scripts]
 permit-audio = "assistant.audio.cli:main"
+permit = "assistant.controller.cli:main"
 
 [dependency-groups]
 dev = ["pytest==9.1.1", "pytest-asyncio==1.4.0", "ruff==0.16.10"]
@@ -46,4 +55,5 @@ markers = [
   "windows: requires a Windows machine and explicit live-test opt-in",
   "macos: requires a macOS machine and explicit live-test opt-in",
   "live_audio: opens audio devices or calls a real local provider",
+  "browser: requires local Playwright MCP and Chromium",
 ]

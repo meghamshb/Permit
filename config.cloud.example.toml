@@ -1,0 +1,27 @@
+# Explicit cloud profile selected by the team. No secrets and no automatic grants.
+# Append these sections to gitignored config.toml to retain the audio configuration.
+[decider]
+enabled = true
+provider = "typesafe"
+base_url = "https://api.typesafe.ai/v1"
+model = "jev-latest"
+# User-selected alias, not immutable weights. Record the resolved model per run.
+revision = "user-selected-jev-latest-2026-10-03"
+locality = "cloud"
+languages = ["en", "yue", "cmn", "mixed"]
+# No confidence threshold until calibrated for a resolved model. Planner fallback
+# is an explicit selected role, not a silent provider switch after an API error.
+[decider.thresholds]
+
+[text_model]
+enabled = true
+provider = "openrouter"
+base_url = "https://openrouter.ai/api/v1"
+model = "deepseek/deepseek-v4.1-flash"
+revision = "deepseek/deepseek-v4.1-flash-20260910"
+locality = "cloud"
+reasoning = "none"
+supports_images = true
+languages = ["en", "yue", "cmn", "mixed"]
+# One active chat client serves planner, writer and the user-selected vision role.
+# Gateway aliases/provider routing cannot guarantee immutable weights.
