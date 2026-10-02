@@ -1,0 +1,42 @@
+{
+  "machine_id": "windows-hacku-01",
+  "recorded_at": "2026-10-03",
+  "os": {
+    "name": "Microsoft Windows 11 Home",
+    "version": "10.0.26200",
+    "build": "26200"
+  },
+  "cpu": {
+    "name": "Intel Core Ultra 9 275HX",
+    "physical_cores": 24,
+    "logical_processors": 24
+  },
+  "gpu": {
+    "name": "NVIDIA GeForce RTX 5070 Ti Laptop GPU",
+    "vram_mib": 12227,
+    "driver": "592.01"
+  },
+  "memory": {
+    "usable_ram_kib": 32961912,
+    "available_ram_kib": 6083204,
+    "pagefile_allocated_mib": 27271,
+    "pagefile_current_usage_mib": 3653,
+    "pagefile_peak_usage_mib": 4991
+  },
+  "runtime": {
+    "python": "3.12.14",
+    "uv": "0.12.22",
+    "llama_cpp_release": "b11349",
+    "llama_cpp_build": 11349,
+    "llama_cpp_commit": "fb4b2737a",
+    "backend": "Vulkan",
+    "asr_quantization": "Q8_0",
+    "asr_revision": "928ab958557df9aa2ef1c93e0e83c7ad0933fae2"
+  },
+  "conditions": "Normal desktop apps were open. Available memory is a snapshot, not peak runtime memory.",
+  "qualifications": {
+    "human_speech": "unrun",
+    "fluent_listener": "unrun",
+    "macos": "unrun"
+  }
+}

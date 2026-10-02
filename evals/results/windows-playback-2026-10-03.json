@@ -1,0 +1,32 @@
+{
+  "recorded_at": "2026-10-02T18:38:35.417112+00:00",
+  "machine": "windows-hacku-01",
+  "source": "Synthetic OS speech; no microphone or human listening assessment",
+  "command": "python scripts/qualify_speech.py --config config.toml --machine windows-hacku-01 --asr --playback --stop-check",
+  "configuration": "llama.cpp b11349, Qwen3-ASR-0.6B Q8_0 pinned in prepare_windows_asr.py; mixed-language hint yue",
+  "playback": [
+    {
+      "language": "en",
+      "status": "returned"
+    },
+    {
+      "language": "yue",
+      "status": "returned"
+    },
+    {
+      "language": "mixed",
+      "status": "returned"
+    },
+    {
+      "language": "cmn",
+      "status": "missing_voice"
+    }
+  ],
+  "cancellation": {
+    "status": "cancelled",
+    "request_to_cancelled_event_ms": 190,
+    "output_stream_closed": true
+  },
+  "physical_audibility": "unrun: needs a listener",
+  "notes": "This records the first playback-enabled run. Later synthetic ASR/voice-stop results are in windows-audio-2026-10-03.json. Neither file proves acoustic quality or hands-free interruption."
+}
