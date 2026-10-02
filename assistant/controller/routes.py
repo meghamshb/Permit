@@ -6,6 +6,7 @@ from time import time
 
 from assistant.controller.contracts import Selector, flatten, locate
 from assistant.platform.base import (
+    AccessError,
     ActionReceipt,
     Focus,
     Node,
@@ -254,6 +255,17 @@ class FileDriver:
     def list_apps(self):
         return []
 
+    def _read_file(self, path):
+        try:
+            return self.route.read(path)
+        except AccessError as error:
+            # B wraps OS failures at its descriptor boundary. A missing file is
+            # an unmet postcondition, never a successful empty read. All other
+            # access failures still stop the task before any write.
+            if type(error) is AccessError and isinstance(error.__cause__, FileNotFoundError):
+                raise FileNotFoundError("Granted file is absent.") from None
+            raise
+
     def snapshot(self, target):
         if target != self.target:
             raise PermissionDenied("File root differs from the granted task.")
@@ -262,7 +274,7 @@ class FileDriver:
         self.hashes = {}
         for path in sorted(self.grant.controls):
             try:
-                data, observed = self.route.read(path)
+                data, observed = self._read_file(path)
                 value = data.decode("utf-8")
                 self.hashes[path] = observed.sha256
             except FileNotFoundError:
@@ -274,7 +286,7 @@ class FileDriver:
 
     def read(self, ref):
         path = self.registry.get(ref)
-        data, _ = self.route.read(path)
+        data, _ = self._read_file(path)
         return data.decode("utf-8")
 
     def act(self, ref, action, value=None):

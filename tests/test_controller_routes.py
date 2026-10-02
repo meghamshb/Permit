@@ -14,7 +14,7 @@ from assistant.controller.native import Native
 from assistant.controller.policy import Grants, Turns
 from assistant.controller.preferences import MemoryPreferences, Preferences
 from assistant.controller.routes import BrowserExecution, ExecutionRoutes, FileDriver
-from assistant.platform.base import Target
+from assistant.platform.base import AccessError, PermissionDenied, Target
 
 
 class MCP:
@@ -209,3 +209,33 @@ async def test_file_route_uses_same_controller_and_preserves_b_secure_boundary(t
     finally:
         await native.close()
         journal.close()
+
+
+@pytest.mark.parametrize("failure", ["missing", "permission", "revoked"])
+def test_file_observation_distinguishes_absence_from_access_failure(tmp_path, failure):
+    grants = Grants()
+    grant = grants.issue(
+        kind="files",
+        scope="file-fixture",
+        expires_at=time() + 60,
+        target=Target(-1, str(tmp_path.resolve())),
+        controls=frozenset({"fixture.txt"}),
+        actions=frozenset({"observe", "read", "set_value"}),
+    )
+    driver = FileDriver(grant, grants)
+
+    def unavailable(path):
+        if failure == "revoked":
+            raise PermissionDenied("Grant revoked") from FileNotFoundError()
+        cause = FileNotFoundError() if failure == "missing" else PermissionError()
+        raise AccessError("Descriptor boundary unavailable") from cause
+
+    driver.route.read = unavailable
+    if failure == "missing":
+        node = driver.snapshot(driver.target).nodes[0]
+        assert node.value is None
+        with pytest.raises(FileNotFoundError):
+            driver.read(node.ref)
+    else:
+        with pytest.raises(AccessError):
+            driver.snapshot(driver.target)
