@@ -1,0 +1,244 @@
+{
+  "scope": "Owner A speech component matrix for AGENTS.md 12.3, not the full product acceptance run",
+  "source": "Public synthetic fixtures; no real messages",
+  "case_count": 20,
+  "cases": [
+    {
+      "id": "en-read",
+      "language": "en",
+      "operation": "read",
+      "fixture": "Chan Tai Man 007381\nMeeting at 09:05.",
+      "expectation": "Read the supplied text directly; preserve identifiers and leading zeros; no writer.",
+      "windows": "unrun_human",
+      "macos": "unrun",
+      "fluent_listener": "unrun"
+    },
+    {
+      "id": "en-dictate",
+      "language": "en",
+      "operation": "dictate",
+      "fixture": "Put code 007381 in the document.",
+      "expectation": "Commit the user's transcript with turn ID/language; do not rewrite. Judge names and digits.",
+      "windows": "unrun_human",
+      "macos": "unrun",
+      "fluent_listener": "unrun"
+    },
+    {
+      "id": "en-notification",
+      "language": "en",
+      "operation": "notification",
+      "fixture": "Read the Outlook test message from Demo Sender only after I confirm.",
+      "expectation": "Announce sender/source without body; selected identity must match confirmation; pending/snooze expose no body. Real connectors belong to C/D.",
+      "windows": "unrun_human",
+      "macos": "unrun",
+      "fluent_listener": "unrun"
+    },
+    {
+      "id": "en-correction",
+      "language": "en",
+      "operation": "correction",
+      "fixture": "Open the document. Correction: use the second document.",
+      "expectation": "Commit input and correction as separate C-supplied turns; C/B verify any cross-app result. A only tests input/output and queuing.",
+      "windows": "unrun_human",
+      "macos": "unrun",
+      "fluent_listener": "unrun"
+    },
+    {
+      "id": "en-stop",
+      "language": "en",
+      "operation": "stop",
+      "fixture": "Stop.",
+      "expectation": "Recognize a standalone voice command; invalidate old input, drop late replies, cancel speech; C supplies a new status turn. A checks speech; C checks future action dispatch.",
+      "windows": "unrun_human",
+      "macos": "unrun",
+      "fluent_listener": "unrun"
+    },
+    {
+      "id": "yue-read",
+      "language": "yue",
+      "operation": "read",
+      "fixture": "陳大文 007381\n會議時間 09:05。",
+      "expectation": "Read the supplied text directly; preserve identifiers and leading zeros; no writer.",
+      "windows": "unrun_human",
+      "macos": "unrun",
+      "fluent_listener": "unrun"
+    },
+    {
+      "id": "yue-dictate",
+      "language": "yue",
+      "operation": "dictate",
+      "fixture": "喺文件入面寫低代碼 007381。",
+      "expectation": "Commit the user's transcript with turn ID/language; do not rewrite. Judge names and digits.",
+      "windows": "unrun_human",
+      "macos": "unrun",
+      "fluent_listener": "unrun"
+    },
+    {
+      "id": "yue-notification",
+      "language": "yue",
+      "operation": "notification",
+      "fixture": "有 Demo Sender 嘅 Outlook 測試訊息，等我確認先讀。",
+      "expectation": "Announce sender/source without body; selected identity must match confirmation; pending/snooze expose no body. Real connectors belong to C/D.",
+      "windows": "unrun_human",
+      "macos": "unrun",
+      "fluent_listener": "unrun"
+    },
+    {
+      "id": "yue-correction",
+      "language": "yue",
+      "operation": "correction",
+      "fixture": "打開文件。更正：用第二份文件。",
+      "expectation": "Commit input and correction as separate C-supplied turns; C/B verify any cross-app result. A only tests input/output and queuing.",
+      "windows": "unrun_human",
+      "macos": "unrun",
+      "fluent_listener": "unrun"
+    },
+    {
+      "id": "yue-stop",
+      "language": "yue",
+      "operation": "stop",
+      "fixture": "停一停。",
+      "expectation": "Recognize a standalone voice command; invalidate old input, drop late replies, cancel speech; C supplies a new status turn. A checks speech; C checks future action dispatch.",
+      "windows": "unrun_human",
+      "macos": "unrun",
+      "fluent_listener": "unrun"
+    },
+    {
+      "id": "cmn-read",
+      "language": "cmn",
+      "operation": "read",
+      "fixture": "陈大文 007381\n会议时间 09:05。",
+      "expectation": "Read the supplied text directly; preserve identifiers and leading zeros; no writer.",
+      "windows": "unrun_human",
+      "macos": "unrun",
+      "fluent_listener": "unrun"
+    },
+    {
+      "id": "cmn-dictate",
+      "language": "cmn",
+      "operation": "dictate",
+      "fixture": "在文档里写下代码 007381。",
+      "expectation": "Commit the user's transcript with turn ID/language; do not rewrite. Judge names and digits.",
+      "windows": "unrun_human",
+      "macos": "unrun",
+      "fluent_listener": "unrun"
+    },
+    {
+      "id": "cmn-notification",
+      "language": "cmn",
+      "operation": "notification",
+      "fixture": "有 Demo Sender 的 Outlook 测试消息，等我确认再读。",
+      "expectation": "Announce sender/source without body; selected identity must match confirmation; pending/snooze expose no body. Real connectors belong to C/D.",
+      "windows": "unrun_human",
+      "macos": "unrun",
+      "fluent_listener": "unrun"
+    },
+    {
+      "id": "cmn-correction",
+      "language": "cmn",
+      "operation": "correction",
+      "fixture": "打开文档。更正：使用第二份文档。",
+      "expectation": "Commit input and correction as separate C-supplied turns; C/B verify any cross-app result. A only tests input/output and queuing.",
+      "windows": "unrun_human",
+      "macos": "unrun",
+      "fluent_listener": "unrun"
+    },
+    {
+      "id": "cmn-stop",
+      "language": "cmn",
+      "operation": "stop",
+      "fixture": "停止。",
+      "expectation": "Recognize a standalone voice command; invalidate old input, drop late replies, cancel speech; C supplies a new status turn. A checks speech; C checks future action dispatch.",
+      "windows": "unrun_human",
+      "macos": "unrun",
+      "fluent_listener": "unrun"
+    },
+    {
+      "id": "mixed-read",
+      "language": "mixed",
+      "operation": "read",
+      "fixture": "陳大文 code 007381\nMeeting 時間 09:05。",
+      "expectation": "Read the supplied text directly; preserve identifiers and leading zeros; no writer.",
+      "windows": "unrun_human",
+      "macos": "unrun",
+      "fluent_listener": "unrun"
+    },
+    {
+      "id": "mixed-dictate",
+      "language": "mixed",
+      "operation": "dictate",
+      "fixture": "幫我喺 document 寫低 code 007381。",
+      "expectation": "Commit the user's transcript with turn ID/language; do not rewrite. Judge names and digits.",
+      "windows": "unrun_human",
+      "macos": "unrun",
+      "fluent_listener": "unrun"
+    },
+    {
+      "id": "mixed-notification",
+      "language": "mixed",
+      "operation": "notification",
+      "fixture": "有 Demo Sender 嘅 Outlook message，等我 confirm 先 read。",
+      "expectation": "Announce sender/source without body; selected identity must match confirmation; pending/snooze expose no body. Real connectors belong to C/D.",
+      "windows": "unrun_human",
+      "macos": "unrun",
+      "fluent_listener": "unrun"
+    },
+    {
+      "id": "mixed-correction",
+      "language": "mixed",
+      "operation": "correction",
+      "fixture": "幫我 open 個 document。Correction：用第二份。",
+      "expectation": "Commit input and correction as separate C-supplied turns; C/B verify any cross-app result. A only tests input/output and queuing.",
+      "windows": "unrun_human",
+      "macos": "unrun",
+      "fluent_listener": "unrun"
+    },
+    {
+      "id": "mixed-stop",
+      "language": "mixed",
+      "operation": "stop",
+      "fixture": "stop",
+      "expectation": "Recognize a standalone voice command; invalidate old input, drop late replies, cancel speech; C supplies a new status turn. A checks speech; C checks future action dispatch.",
+      "windows": "unrun_human",
+      "macos": "unrun",
+      "fluent_listener": "unrun"
+    }
+  ],
+  "typed_smoke": [
+    {
+      "id": "typed-exact",
+      "text": "  陳大文 007381\nDo not rewrite. ",
+      "mode": "dictate",
+      "expected": "Exact committed payload without ASR/TTS",
+      "status": "unit_contract_tested; full task unrun"
+    },
+    {
+      "id": "typed-act",
+      "text": "Open the notes",
+      "mode": "act",
+      "expected": "Emit input into C without importing audio dependencies; verified action owned by C/B",
+      "status": "unit_contract_tested; full task unrun"
+    },
+    {
+      "id": "typed-quoted-stop",
+      "text": "stop",
+      "mode": "dictate",
+      "expected": "Commit the word as content",
+      "status": "unit_contract_tested"
+    },
+    {
+      "id": "typed-control-stop",
+      "text": "stop",
+      "mode": "act",
+      "expected": "Stop control event; do not commit as a task",
+      "status": "unit_contract_tested"
+    },
+    {
+      "id": "typed-cancelled-turn",
+      "text": "late instruction",
+      "mode": "act",
+      "expected": "No input committed after cancellation",
+      "status": "unit_contract_tested"
+    }
+  ]
+}

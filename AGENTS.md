@@ -2,7 +2,7 @@
 
 This file is the single source of truth for building Permit, our HacKU computer assistant. It is written for teammates and for coding agents (Claude Code, Codex, others). If code and this file disagree, fix one of them in the same PR.
 
-Status (3 October 2026): **nothing is built or benchmarked yet.** A model that loads, a passing unit test or a demo video is not evidence of a working assistant. Measure before claiming. Facts below marked *(verify)* come from documentation and have not been tested on our machines.
+Status (3 October 2026): **owner A's speech/audio component is implemented in this checkout; the complete assistant is not built or qualified.** Local Windows synthetic ASR/TTS/playback/stop checks and unit tests are recorded in `evals/` and summarized in `README.md`. Mac and human/microphone qualification remain unrun, Mandarin voice is missing on the tested Windows machine, and Chinese/mixed transcripts fail the strict writing-system/text fixture comparison. C/B/D integration, live connectors and the product acceptance matrix remain pending. A model that loads, a passing unit test or a demo video is not evidence of a working assistant. Facts below marked *(verify)* come from documentation and have not been tested on our machines.
 
 ## 1. What we are building
 

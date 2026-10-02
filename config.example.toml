@@ -1,0 +1,40 @@
+# Owner A configuration. Copy to gitignored config.toml.
+# One provider per role, with no silent fallback. Spoken language is independent
+# of input language and Traditional/Simplified preferences (owned by C/D).
+[audio]
+input_language = "en"
+spoken_language = "en"
+mixed_base_language = "yue"
+sample_rate = 16000
+frame_samples = 512
+silence_ms = 600
+minimum_speech_ms = 160
+maximum_utterance_seconds = 30
+echo_tail_ms = 250
+stop_hotkey = "<f8>"
+# During playback, microphone input is suppressed. Explicitly starting a new
+# listening turn cancels playback, drains captured data and waits echo_tail_ms.
+# Hands-free stop during speaker playback is NOT acoustically qualified.
+
+[asr]
+provider = "llama_cpp"
+base_url = "http://127.0.0.1:8767"
+model = "ggml-org/Qwen3-ASR-0.6B-GGUF"
+revision = "928ab958557df9aa2ef1c93e0e83c7ad0933fae2"
+# Set true only after inspecting a local, offline llama-server process.
+local_server_verified = false
+timeout_seconds = 30
+# ASR language hint for Cantonese/English mixtures, independent of spoken output.
+# Empty string requests automatic language detection for mixed input.
+mixed_language_hint = "yue"
+
+[asr.macos]
+provider = "mlx_audio"
+model = "mlx-community/Qwen3-ASR-0.6B-8bit"
+revision = "89e96d92ba34aca20b3e29fb10cc284097d1219f"
+model_path = "models/qwen3-asr-mlx"
+
+[tts]
+provider = "os"
+# Blank chooses an installed voice in the requested dialect; never another dialect.
+preferred_voice_id = ""

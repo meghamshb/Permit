@@ -1,0 +1,135 @@
+{
+  "recorded_at": "2026-10-02T18:43:53.618544+00:00",
+  "machine": "windows-hacku-01",
+  "source": "synthetic OS speech; no human or acoustic qualification",
+  "measurements": "One small fixture per language, repeated on a loaded server. Not cold load, end-of-turn latency, peak memory or task completion.",
+  "prompt_cache": false,
+  "asr": {
+    "provider": "llama.cpp",
+    "model": "ggml-org/Qwen3-ASR-0.6B-GGUF",
+    "revision": "928ab958557df9aa2ef1c93e0e83c7ad0933fae2",
+    "languages": [
+      "en",
+      "yue",
+      "cmn",
+      "mixed"
+    ],
+    "locality": "local"
+  },
+  "mixed_language_hint": "yue",
+  "results": [
+    {
+      "language": "en",
+      "status": "synthesized",
+      "duration_seconds": 1.865,
+      "synthesis_ms": 13,
+      "asr_runs": [
+        {
+          "repetition": 1,
+          "text": "Open the document.",
+          "language": "en",
+          "exact_fixture_match": true,
+          "request_ms": 278
+        },
+        {
+          "repetition": 2,
+          "text": "Open the document.",
+          "language": "en",
+          "exact_fixture_match": true,
+          "request_ms": 59
+        },
+        {
+          "repetition": 3,
+          "text": "Open the document.",
+          "language": "en",
+          "exact_fixture_match": true,
+          "request_ms": 60
+        }
+      ]
+    },
+    {
+      "language": "yue",
+      "status": "synthesized",
+      "duration_seconds": 2.456625,
+      "synthesis_ms": 33,
+      "asr_runs": [
+        {
+          "repetition": 1,
+          "text": "帮我打开文件。",
+          "language": "yue",
+          "exact_fixture_match": false,
+          "request_ms": 180
+        },
+        {
+          "repetition": 2,
+          "text": "帮我打开文件。",
+          "language": "yue",
+          "exact_fixture_match": false,
+          "request_ms": 93
+        },
+        {
+          "repetition": 3,
+          "text": "帮我打开文件。",
+          "language": "yue",
+          "exact_fixture_match": false,
+          "request_ms": 65
+        }
+      ]
+    },
+    {
+      "language": "cmn",
+      "status": "missing_voice"
+    },
+    {
+      "language": "mixed",
+      "status": "synthesized",
+      "duration_seconds": 2.5204375,
+      "synthesis_ms": 7,
+      "asr_runs": [
+        {
+          "repetition": 1,
+          "text": "帮我open个document。",
+          "language": "mixed",
+          "exact_fixture_match": false,
+          "request_ms": 74
+        },
+        {
+          "repetition": 2,
+          "text": "帮我open个document。",
+          "language": "mixed",
+          "exact_fixture_match": false,
+          "request_ms": 69
+        },
+        {
+          "repetition": 3,
+          "text": "帮我open个document。",
+          "language": "mixed",
+          "exact_fixture_match": false,
+          "request_ms": 68
+        }
+      ]
+    }
+  ],
+  "stop": {
+    "status": "cancelled",
+    "request_to_cancelled_event_ms": 194,
+    "output_stream_closed": true,
+    "physical_audibility": "unrun: needs a listener"
+  },
+  "voice_stop": [
+    {
+      "language": "en",
+      "voice_stop_event": true,
+      "no_committed_task": true,
+      "physical_audibility": "unrun: needs a listener"
+    },
+    {
+      "language": "yue",
+      "voice_stop_event": true,
+      "no_committed_task": true,
+      "physical_audibility": "unrun: needs a listener"
+    }
+  ],
+  "human_speech": "unrun",
+  "fluent_listener": "unrun"
+}
