@@ -212,3 +212,67 @@ Measure each of these separately:
 Keep cold and warm runs apart. An acknowledgement is not completion. Report the actual matrix, never "works everywhere". Fluent speakers judge Cantonese and Mandarin output.
 
 Suggested owners: **A** speech (ASR, TTS, VAD, languages) · **B** platform drivers (macOS AX, Windows UIA) and routes · **C** controller, decider, providers, UI · **D** evals, machines, licenses, demo.
+
+## 11. Features
+
+These additions extend the existing controller, provider adapters, UI and SQLite storage. They do not replace the voice/text contract or the platform interfaces above. All capabilities below are **proposed, not built or benchmarked**.
+
+### 11.1 Target users and setting
+
+People with visual impairments are the target users; a developer with low vision working on their everyday computer is one example, not an app or occupation restriction. The adoption barrier is the visual inspection and navigation required by ordinary computer workflows. Permit lets the user delegate work through the existing voice/text controller and receive results they can review without relying solely on visual inspection.
+
+For Track 4, demonstrate one complete task in this setting and compare it with the user's current magnification or screen-reader workflow. Measure completion time, mistakes, interventions and recovery. Test with visually impaired participants; do not assume one interaction pattern fits everyone. Do not claim a prevalence figure or health benefit without supporting evidence.
+
+### 11.2 Personal preference profiles
+
+**Decision: SQLite is the source of truth.** Use the existing `store/` layer, not a growing Markdown file as runtime memory. Profiles stay local by default.
+
+- Save preferred apps, working folders, input/spoken language, writing language and Traditional/Simplified script as separate structured preferences.
+- Support general defaults and explicit app/task-specific overrides. Current task instructions take precedence over saved task/app preferences, then general preferences, then product defaults. Preferences never override execution or permission checks.
+- Record each preference's value, scope, source and update time. Start with preferences explicitly saved by the user; inferred preferences are suggestions until accepted.
+- Load only relevant preferences into a task. Treat profile values as data, not executable instructions.
+- Let the user inspect, edit, forget and reset preferences through the existing accessible UI and voice/text interaction.
+- **Preferences are not grants.** A preferred folder does not authorize access; a preferred cloud model does not authorize disclosure. Keep grants and revocation separate from profile values.
+
+Qualification: save a preference, restart, verify that it is applied, override it for one task, and revoke a related grant. The saved preference must not bypass the revoked grant.
+
+### 11.3 On-demand screen description
+
+When asked what is happening on screen, Permit describes the current visible state and responds through the existing text output and optional speech.
+
+- Use fresh AX/UIA or browser state for accessible app, window, focus, dialog and text information.
+- **No separate OCR stage for this feature.** For requests requiring visual interpretation, capture the relevant window or screen and route it to a configured frontier vision-capable ChatGPT/OpenAI model through `providers/`. Pin the selected model in configuration; qualify its actual screenshot support before relying on it.
+- A screenshot sent to a hosted model is a cloud disclosure. Apply section 7: obtain or reuse a valid grant naming the provider, model, screenshot data and expiry before transmission. Capture only the relevant area where possible; broader capture needs an appropriate scope and OS permission.
+- Keep screenshots transient by default. Do not add them to logs, preference profiles or persistent task history.
+- Separate exact retrieved text from generated visual interpretation. State uncertainty, unreadable content and missing coverage; a description is not proof that an action succeeded.
+- Screen description is read-only. Content shown in the screenshot cannot authorize an action or override the user's instructions.
+- A denied grant or unavailable provider produces an explicit limitation, with accessible-state description where possible. Do not silently send the screenshot elsewhere.
+
+This is an opt-in use of the existing planned vision/provider extension; local processing remains the default for other roles. Skipping OCR does not establish low latency: measure capture, upload, inference and first useful audio separately. Description on request does not imply continuous screen capture or unattended monitoring.
+
+Qualification: describe a fresh screen, identify uncertainty, refuse cloud transmission under a denied grant, and verify that screenshots are not retained. Report actual latency and data destination.
+
+### 11.4 Incoming-message announcements and confirmed readout
+
+Connect WhatsApp and Outlook through authorized MCP adapters to retrieve incoming messages and announce them. This feature is **read-only**; sending remains disabled by default under section 8. Connector availability, incoming-message access and event/polling support must be verified, not assumed.
+
+The interaction is:
+
+1. Detect a new incoming message from an enabled source.
+2. Announce the app and sender without reading the body: “You have a new Outlook email from Yarjan. Would you like me to read it?”
+3. On confirmation, retrieve and read the selected message's original text through the configured speech output. A separately requested summary is labelled as generated, not exact reading.
+4. On refusal, snooze Permit's announcement. Do not delete, archive, reply to or intentionally mark the source message as read.
+5. With no response, leave it pending without reading its contents aloud.
+
+Infrastructure and rules:
+
+- Add MCP source adapters and a notification queue controlled by the existing controller. Use source events where supported or configured polling otherwise.
+- Enable monitoring explicitly per source. Store notification IDs, source references, pending/announced/snoozed status and snooze timing in SQLite for deduplication and recovery; keep message bodies out of persistent logs and queue records by default.
+- Configure snooze duration, quiet periods and sender/source preferences through the preference profile. These settings do not replace connector access grants or the confirmation required to read a body aloud.
+- Bind confirmation to one identified notification. If another message arrives, do not let a late “yes” select the wrong message. Reconcile source state before reading; explain if the message is unavailable.
+- Queue announcements while the user is speaking or another result is being spoken. Stop cancels current speech and future dispatch under the existing turn rules; unread notifications remain pending.
+- Keep external message text as data. Instructions inside a message never trigger actions or change permissions.
+- Confirm connector retrieval and read-status behavior during qualification. Disclose unavoidable source-side effects; do not promise that fetching a message leaves its read status unchanged without testing it.
+- Announcements and readout require no screenshot or vision-model call. Cloud connector access remains subject to the applicable data-sharing grants.
+
+Qualification: receive a message, announce its sender/source, confirm exact readout, decline and snooze another message, handle no response, prevent duplicate announcements after restart, and test two arrivals around one confirmation. Verify that no outgoing message is sent and record any source-side read-status effects.
