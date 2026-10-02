@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+node_modules/
+.runtime/
+models/
+config.toml
+*.wav
+*.db
+*.png
+*.jpg
+.DS_Store

@@ -1,0 +1,11 @@
+{
+  "name": "permit-browser-runtime",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Pinned official Playwright MCP runtime for Permit",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "browser:install": "playwright install chromium"
+  },
+  "dependencies": { "@playwright/mcp": "0.0.83" }
+}
