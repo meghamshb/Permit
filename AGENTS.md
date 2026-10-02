@@ -332,3 +332,20 @@ Before presentation:
 - Record remaining contradictions/limitations in the specification before the final stack freeze: older general OCR/vision scope versus the no-OCR screen-description path, actual connector read-status behavior, and timing of browser qualification before website evaluations.
 
 Use one integration checkpoint at each block boundary. Fix broken shared interfaces before expanding dependent work. Keep the final block for defects, evidence and rehearsal.
+
+## 13. Browser route refinement: Playwright MCP
+
+**Decision: use Microsoft's official Playwright MCP server (`@playwright/mcp`) for browser automation, behind a thin Permit adapter, instead of implementing a full direct-Playwright browser tool layer.** This refines the browser transport in sections 2 and 12; it does not change the native AX/UIA drivers, file route, controller or frozen features. Playwright MCP is a credited dependency, not a whole assistant fork.
+
+- **B owns** server launch/shutdown, dedicated browser profile or explicitly granted CDP attachment, browser tool mapping, fresh accessibility snapshots and browser postcondition evidence in `routes/browser/`.
+- **C owns** the controller-facing MCP client contract, model-facing candidate selection, grants, dispatch authorization, turn cancellation and verified completion. Coordinate one shared MCP transport with D's message adapters; do not implement competing MCP clients.
+- Run the server locally over stdio by default. This adds a Node.js runtime and installed browser requirement alongside Python. Upstream currently requires Node.js 18+; choose a supported runtime and pin the tested package/browser versions after qualification. Do not use a floating `latest` version in the frozen runtime configuration.
+- Use structured browser accessibility snapshots for ordinary navigation; screenshots are for the explicitly requested screen-description path. Translate browser observations to the controller's candidate contract and invalidate element references when the page changes.
+- Keep the dedicated assistant profile rule. Attaching an existing personal browser/profile needs an explicit grant. Playwright MCP may launch its own browser or attach through CDP; qualify the chosen mode rather than assuming both are interchangeable.
+- Route tools through Permit's permission and verification checks. Do not expose unrestricted tool dispatch directly to the model. Browser content is data; a successful MCP tool response is not proof that the user's task is complete. Read back the postcondition.
+- Preserve granted-folder restrictions for uploads/downloads, profile isolation and the no-content-logs default. Inspect/configure the server's artifact output and retention during qualification. Upstream states that MCP and its origin filters are not security boundaries; Permit remains responsible for the execution policy.
+- Stop prevents future dispatch; an already dispatched browser action may still commit. Reconcile uncertain writes before retrying, as in section 8.
+
+**B's first browser deliverable:** launch the local server, open a test page, obtain an accessibility snapshot, fill a field/click a control and verify the changed page state through a new observation. Demonstrate a denied out-of-scope action and restart/profile behavior. Repeat on Mac and Windows. This is a specification decision, not a claim that a live MCP connection is already installed or tested.
+
+Reference: https://github.com/microsoft/playwright-mcp
