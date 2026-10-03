@@ -130,7 +130,7 @@ class NativeMacBackend:
         actions = []
         err, names = self.ax.AXUIElementCopyActionNames(element, None)
         if err == 0 and "AXPress" in (names or ()):
-            actions.append("press")
+            actions.append("invoke")
         err, settable = self.ax.AXUIElementIsAttributeSettable(element, "AXValue", None)
         if err == 0 and settable and not secure:
             actions.append("set_value")
@@ -159,7 +159,7 @@ class NativeMacBackend:
         return info["value"]
 
     def perform(self, element, action, value):
-        if action == "press":
+        if action == "invoke":
             err = self.ax.AXUIElementPerformAction(element, "AXPress")
         elif action in ("set_value", "focus"):
             attr = "AXValue" if action == "set_value" else "AXFocused"

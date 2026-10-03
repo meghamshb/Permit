@@ -9,7 +9,7 @@ from assistant.platform.base import (
     UncertainAction,
     UnsupportedTarget,
 )
-from assistant.platform.macos.driver import MacOSDriver
+from assistant.platform.macos.driver import MacOSDriver, NativeMacBackend
 
 
 class FakeMac:
@@ -147,6 +147,61 @@ def test_expired_ref_never_dispatches():
     ref = input_ref(driver)
     with pytest.raises(StaleReference):
         driver.read(ref)
+
+
+def test_public_axpress_is_exposed_and_dispatched_as_invoke():
+    """Exercise the real AX adapter mapping without an OS permission or desktop."""
+    calls = []
+
+    class AX:
+        def AXUIElementCopyActionNames(self, element, output):
+            return 0, ("AXPress",)
+
+        def AXUIElementIsAttributeSettable(self, element, name, output):
+            return 0, False
+
+        def AXUIElementPerformAction(self, element, name):
+            calls.append((element, name))
+            return 0
+
+    backend = object.__new__(NativeMacBackend)
+    backend.ax = AX()
+    attributes = {"AXRole": "AXButton", "AXTitle": "Apply", "AXEnabled": True}
+    backend.attr = lambda element, name, default=None: attributes.get(name, default)
+    info = backend.describe("button")
+    assert info["role"] == "button" and info["actions"] == ("invoke",)
+    assert backend.perform("button", "invoke", None) == "AX"
+    assert calls == [("button", "AXPress")]
+    with pytest.raises(UnsupportedTarget):
+        backend.perform("button", "press", None)
+
+
+def test_driver_invocation_requires_fresh_ref_and_focus():
+    class ButtonMac(FakeMac):
+        def describe(self, handle):
+            info = super().describe(handle)
+            if handle == "input":
+                info.update(role="button", actions=("invoke",))
+            return info
+
+        def perform(self, handle, action, value):
+            assert action == "invoke" and value is None
+            self.dispatches += 1
+            return "AX"
+
+    backend = ButtonMac()
+    driver = MacOSDriver(backend)
+    ref = input_ref(driver)
+    receipt = driver.act(ref, "invoke")
+    assert receipt.dispatched and receipt.status == "submitted"
+    assert backend.dispatches == 1
+    with pytest.raises(StaleReference):
+        driver.act(ref, "invoke")
+    ref = input_ref(driver)
+    backend.target = Target(99, "other")
+    with pytest.raises(FocusChanged):
+        driver.act(ref, "invoke")
+    assert backend.dispatches == 1
 
 
 @pytest.mark.macos
