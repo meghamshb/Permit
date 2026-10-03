@@ -39,7 +39,9 @@ be mistaken for a measurement of this pinned version.
   Live identity/name/role, enabled state, OS permission and foreground window are
   checked before dispatch. These checks cannot make focus changes atomic; reobserve
   and check the postcondition after every write.
-- Actions are `press`, `set_value`, `focus`, and explicitly enabled `type_text`.
+- Actions are `invoke` (public `AXPress`), `set_value`, `focus`, and explicitly
+  enabled `type_text`. `invoke` matches the Windows UIA/controller vocabulary;
+  the OS-specific `press` name is not a controller action.
   Synthetic input needs the exact focused text field, no held modifiers/control
   characters, and no available semantic Value action. No silent fallback from a
   failed semantic action. Generic Enter completion is prohibited.

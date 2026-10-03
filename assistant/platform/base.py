@@ -92,6 +92,14 @@ class ActionReceipt:
 
 
 class AccessibilityDriver(Protocol):
+    """Use shared action names at the controller boundary.
+
+    ``invoke`` activates a control (AXPress on macOS, UIA Invoke on Windows);
+    ``set_value`` replaces its editable text. Other supported actions remain
+    explicit in each observed node. Never expose the OS-specific name ``press``
+    in place of ``invoke``: controllers must not branch on the platform.
+    """
+
     def list_apps(self) -> list[AppInfo]: ...
     def focused(self) -> Focus: ...
     def snapshot(self, target: Target) -> Tree: ...
