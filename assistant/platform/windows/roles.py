@@ -1,0 +1,47 @@
+"""Microsoft UIA control type IDs mapped onto the shared role vocabulary."""
+
+ROLES = {
+    50000: "button",
+    50001: "calendar",
+    50002: "checkbox",
+    50003: "combo box",
+    50004: "text field",
+    50005: "link",
+    50006: "image",
+    50007: "list item",
+    50008: "list",
+    50009: "menu",
+    50010: "menu bar",
+    50011: "menu item",
+    50012: "progress bar",
+    50013: "radio button",
+    50014: "scroll bar",
+    50015: "slider",
+    50016: "spin button",
+    50017: "status bar",
+    50018: "tab",
+    50019: "tab item",
+    50020: "text",
+    50021: "toolbar",
+    50022: "tooltip",
+    50023: "tree",
+    50024: "tree item",
+    50025: "custom",
+    50026: "group",
+    50027: "thumb",
+    50028: "data grid",
+    50029: "data item",
+    50030: "document",
+    50031: "split button",
+    50032: "window",
+    50033: "pane",
+    50034: "header",
+    50035: "header item",
+    50036: "table",
+    50037: "title bar",
+    50038: "separator",
+}
+
+
+def normalize_role(control_type: int) -> str:
+    return ROLES.get(control_type, "unknown")
