@@ -1,0 +1,18 @@
+# B route setup only. C supplies controller grants and provider settings.
+[computer_access]
+snapshot_max_age_seconds = 10.0
+allow_synthetic_input = false
+
+[browser]
+transport = "stdio"
+server = "@playwright/mcp"
+version = "0.0.83"
+profile = ".runtime/browser-profile"
+headless = false
+uploads = false
+downloads = false
+
+[capture]
+scope = "window"
+max_pixels = 16000000
+persist = false
