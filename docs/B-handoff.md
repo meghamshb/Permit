@@ -7,7 +7,9 @@
   arbitrary workers for successive UIA calls. B does not authorize user requests.
 - `AccessibilityDriver` and shared Node/Tree/Target/Focus/ActionReceipt live in
   `assistant/platform/base.py`. Select actions from the observed node's actions;
-  roles are normalized, while supported action names differ by adapter.
+  roles are normalized. Native button activation is `invoke` on both OSes: public
+  AXPress on macOS and UIA Invoke on Windows. Additional supported actions differ
+  by adapter; do not pass the old Mac-specific `press` action to the controller.
 - `assistant.mcp_transport.StdioMCPClient` is the shared local stdio transport.
   BrowserRoute supplies a typed policy hook; use that adapter, not raw model tool
   dispatch. D can reuse transport without creating another client implementation.
